@@ -1,7 +1,7 @@
 from .player import Player
 from .dice import roll_dice
 from .board import Board
-from storage.db import save_game, load_game, delete_game
+from db import save_game, load_game, delete_game
 
 class LudoGame:
     def __init__(self, chat_id):
