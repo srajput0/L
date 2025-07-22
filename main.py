@@ -1,6 +1,6 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
-from ludo.game import LudoGame
+from game import LudoGame
 
 games = {}
 
