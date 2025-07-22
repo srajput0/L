@@ -27,7 +27,7 @@ async def roll(update: Update, context: ContextTypes.DEFAULT_TYPE):
     games[chat_id] = game
     await update.message.reply_text(result)
 
-app = ApplicationBuilder().token("YOUR_TOKEN_HERE").build()
+app = ApplicationBuilder().token("7882173382:AAGFqT3FNolrkIHmn83uG2CsFDS1bDgBZ-s").build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("startgame", start_game))
 app.add_handler(CommandHandler("join", join))
