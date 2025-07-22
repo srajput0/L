@@ -1,6 +1,6 @@
-from .player import Player
-from .dice import roll_dice
-from .board import Board
+from player import Player
+from dice import roll_dice
+from board import Board
 from db import save_game, load_game, delete_game
 
 class LudoGame:
