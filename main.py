@@ -9,25 +9,23 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def start_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-    games[chat_id] = LudoGame()
+    games[chat_id] = LudoGame(chat_id)
     await update.message.reply_text("✅ New Ludo game created. Players can now /join")
 
 async def join(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     user = update.effective_user.first_name
-    if chat_id in games:
-        msg = games[chat_id].add_player(user)
-        await update.message.reply_text(msg)
-    else:
-        await update.message.reply_text("No active game. Use /startgame.")
+    game = games.get(chat_id) or LudoGame(chat_id)
+    msg = game.add_player(user)
+    games[chat_id] = game
+    await update.message.reply_text(msg)
 
 async def roll(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-    if chat_id in games:
-        result = games[chat_id].roll_dice()
-        await update.message.reply_text(result)
-    else:
-        await update.message.reply_text("Start a game first with /startgame.")
+    game = games.get(chat_id) or LudoGame(chat_id)
+    result = game.roll_dice()
+    games[chat_id] = game
+    await update.message.reply_text(result)
 
 app = ApplicationBuilder().token("YOUR_TOKEN_HERE").build()
 app.add_handler(CommandHandler("start", start))
